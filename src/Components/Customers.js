@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { CardActionArea,Typography,Button,CardContent,CardActions,Card,CardMedia,Grid,IconButton } from '@mui/material';
+import { CardActionArea,TextField, Typography,Button,CardContent,CardActions,Card,CardMedia,Grid,IconButton } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function Customers() {
 
@@ -8,6 +12,17 @@ function Customers() {
 //   const { FetchFests, DeleteFest, fest, setFest, update, setupdate } = context;
   const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [formdata, setFormdata] = useState({email: "",balance: 0});
+  // const [balance, setBalance] = useState(0)
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setCustomers([  {
@@ -32,11 +47,58 @@ function Customers() {
   }])
   }, []);
 
+  const onChange = (e) => {
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+    console.log(formdata)
+  }
 
+  const handleUpdate = async()=> {
+    let jsonData = {
+      email:formdata.email,
+      balance:formdata.balance
+    }
+    console.log(jsonData)
+    // loginuser(jsonData)
+    setOpen(false);
+  };
   
   return (
     <>
       <div className="myfest">
+      <Button className="submitbtn" name="balance" onClick={handleClickOpen} size="small">
+                  Update Balance
+                </Button>
+                <Button className="submitbtn" name="addcustomer" onClick={() => navigate(`/addcustomer`)} size="small">
+                  Add Customer
+                </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Update Balance</DialogTitle>
+        <DialogContent>
+          <TextField
+            label={"Email"}
+            id={"email"}
+            type={"email"}
+            width={"100%"}
+            onChange={onChange}
+            value={formdata.email}
+            name={"email"}
+          ></TextField>
+          <TextField
+            label={"Updated Balance"}
+            id={"balance"}
+            type={"number"}
+            width={"100%"}
+            onChange={onChange}
+            value={formdata.balance}
+            name={"balance"}
+          ></TextField>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button name={"Cancel"} clickfunc={handleClose}></Button>
+          <Button name={"Update"} clickfunc={handleUpdate}></Button> */}
+        </DialogActions>
+      </Dialog>
+
         <Grid container rowSpacing={3} spacing={1} sx={{ position: 'relative',pt:"4%"}}>
           {customers.map((customer) => (
             <Grid key={customer.custId} item xs={4}>
