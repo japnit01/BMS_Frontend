@@ -3,7 +3,7 @@ import { Typography, TextField, InputLabel, MenuItem, Select, FormControl, Butto
 
 function Customer() {
 
-  const [customer, setCustomer] = useState({fname: "", lname: "", address: "", mobileno: "", age: 0, email: ""});
+  const [customer, setCustomer] = useState({fname: "", lname: "", address: "", mobileno: "", age: "", email: ""});
   // const host = 'http://localhost:5000';
   // useEffect(() => {
   //   setupdate(true)
@@ -83,6 +83,21 @@ function Customer() {
             >
             </TextField>
 
+            <TextField
+                label="Email"
+                id="email"
+                type="text"
+                className="email"
+                sx={{ width: "100%" }}
+                onChange={onChange}
+                value={customer.fee}
+                name="email"
+                margin="dense"
+                variant="filled"
+                autoComplete="off"
+              >
+              </TextField>
+
             <div className="placecontainer">
               <TextField
                 label="Mobile No."
@@ -98,28 +113,13 @@ function Customer() {
                 autoComplete="off"
               >
               </TextField>
-
-              <TextField
-                label="Email"
-                id="email"
-                type="text"
-                className="email"
-                sx={{ width: "26%" }}
-                onChange={onChange}
-                value={customer.fee}
-                name="email"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
               
               <TextField
                 label="Age"
                 id="age"
                 type="number"
                 className="age"
-                sx={{ width: "26%" }}
+                sx={{ width: "28%", marginLeft: '0.6rem' }}
                 onChange={onChange}
                 value={customer.age}
                 name="age"
