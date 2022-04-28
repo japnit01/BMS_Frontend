@@ -170,7 +170,7 @@ function Navbar() {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            BMS
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
