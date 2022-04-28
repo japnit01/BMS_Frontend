@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Typography, TextField, InputLabel, MenuItem, Select, FormControl, Button, InputAdornment, Container } from "@mui/material";
 
-function Customer() {
+function Employee() {
 
-  const [customer, setCustomer] = useState({fname: "", lname: "", address: "", mobileno: "", age: 0, email: ""});
-  // const host = 'http://localhost:5000';
+  const [employee, setEmployee] = useState({fname: "", lname: "", dept: ""});
+//   const host = 'http://localhost:5000';
   // useEffect(() => {
   //   setupdate(true)
   // }, []);
 
   const onChange = (e) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
-    console.log(customer)
+    setEmployee({ ...employee, [e.target.name]: e.target.value });
+    console.log(employee)
   }
 
   const handleClick = async() => {
@@ -28,7 +28,7 @@ function Customer() {
       // })
 
       // let custDetails = await response.json();
-      console.log(customer)
+      console.log(employee)
 
       // return custDetails;
   }
@@ -47,7 +47,7 @@ function Customer() {
               className="fname"
               sx={{ width: "100%" }}
               onChange={onChange}
-              value={customer.fname}
+              value={employee.fname}
               name="fname"
               margin="dense"
               variant="filled"
@@ -61,7 +61,7 @@ function Customer() {
               className="lname"
               sx={{ width: "100%" }}
               onChange={onChange}
-              value={customer.lname}
+              value={employee.lname}
               name="lname"
               margin="dense"
               variant="filled"
@@ -69,66 +69,19 @@ function Customer() {
             ></TextField>
 
             <TextField
-              label="Address"
-              id="address"
+              label="Department"
+              id="dept"
               type="text"
-              className="address"
+              className="dept"
               sx={{ width: "100%" }}
               onChange={onChange}
-              value={customer.address}
-              name="address"
+              value={employee.dept}
+              name="dept"
               margin="dense"
               variant="filled"
               autoComplete="off"
             >
             </TextField>
-
-            <div className="placecontainer">
-              <TextField
-                label="Mobile No."
-                id="mobileno"
-                type="text"
-                className="mobileno"
-                sx={{ width: "70%" }}
-                onChange={onChange}
-                value={customer.mobileno}
-                name="mobileno"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
-
-              <TextField
-                label="Email"
-                id="email"
-                type="text"
-                className="email"
-                sx={{ width: "26%" }}
-                onChange={onChange}
-                value={customer.fee}
-                name="email"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
-              
-              <TextField
-                label="Age"
-                id="age"
-                type="number"
-                className="age"
-                sx={{ width: "26%" }}
-                onChange={onChange}
-                value={customer.age}
-                name="age"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
-            </div>
 
             <div className="buttoncontainer">
               <Button className="submitbtn" onClick={handleClick} size="small">
@@ -142,4 +95,4 @@ function Customer() {
   )
 }
 
-export default Customer;
+export default Employee;
