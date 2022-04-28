@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar'
 import AddCustomer from './Components/AddCustomer'
 import AddEmployee from './Components/AddEmployee'
 import Customers from './Components/Customers'
+import Home from './Components/Home'
 
 function App() {
   return (
@@ -10,8 +11,7 @@ function App() {
       <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" />
-            {/* <Route index element={<Home />} /> */}
+            <Route index path="/" element={<Home />} />
             {/* <Route path="login" element={<Login />} /> */}
             <Route path="addcustomer" element={<AddCustomer />} />
             <Route path="addemployee" element={<AddEmployee />} />

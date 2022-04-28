@@ -3,11 +3,8 @@ import { Typography, TextField, InputLabel, MenuItem, Select, FormControl, Butto
 
 function AddCustomer() {
 
-  const [customer, setCustomer] = useState({fname: "", lname: "", address: "", mobileno: "", age: "", email: ""});
-  // const host = 'http://localhost:5000';
-  // useEffect(() => {
-  //   setupdate(true)
-  // }, []);
+  const [customer, setCustomer] = useState({fname: "", lname: "", Address: "", MobileNo: "", Age: "", Email: ""});
+  const host = 'http://localhost:5000';
 
   const onChange = (e) => {
     setCustomer({ ...customer, [e.target.name]: e.target.value });
@@ -16,21 +13,19 @@ function AddCustomer() {
 
   const handleClick = async() => {
       // make connection with api
-      // let jsondata = customer;
-      // let url = `${host}/api/data/customer`;
+      let jsondata = customer;
+      let url = `${host}/api/c/addcustomer`;
 
-      // let response = await fetch(url, {
-      //   method: 'POST',
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify(jsondata)
-      // })
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsondata)
+      })
 
-      // let custDetails = await response.json();
+      let custDetails = await response.json();
       console.log(customer)
-
-      // return custDetails;
   }
 
   return (
@@ -38,7 +33,7 @@ function AddCustomer() {
        <div className="signupcontainer">
         <div className="subcontainer">
           <Container maxWidth="sm" sx={{ ml: 3, pt: "7%" }}>
-            <Typography variant="h4" sx={{ color: "white", pb: "4%" }}>Sign Up</Typography>
+            <Typography variant="h4" sx={{pb: "4%" }}>New Customer</Typography>
 
             <TextField
               label="First Name"
@@ -75,8 +70,8 @@ function AddCustomer() {
               className="address"
               sx={{ width: "100%" }}
               onChange={onChange}
-              value={customer.address}
-              name="address"
+              value={customer.Address}
+              name="Address"
               margin="dense"
               variant="filled"
               autoComplete="off"
@@ -90,8 +85,8 @@ function AddCustomer() {
                 className="email"
                 sx={{ width: "100%" }}
                 onChange={onChange}
-                value={customer.fee}
-                name="email"
+                value={customer.Email}
+                name="Email"
                 margin="dense"
                 variant="filled"
                 autoComplete="off"
@@ -106,8 +101,8 @@ function AddCustomer() {
                 className="mobileno"
                 sx={{ width: "70%" }}
                 onChange={onChange}
-                value={customer.mobileno}
-                name="mobileno"
+                value={customer.MobileNo}
+                name="MobileNo"
                 margin="dense"
                 variant="filled"
                 autoComplete="off"
@@ -121,8 +116,8 @@ function AddCustomer() {
                 className="age"
                 sx={{ width: "28%", marginLeft: '0.6rem' }}
                 onChange={onChange}
-                value={customer.age}
-                name="age"
+                value={customer.Age}
+                name="Age"
                 margin="dense"
                 variant="filled"
                 autoComplete="off"
@@ -146,7 +141,7 @@ function AddCustomer() {
               </TextField>
 
             <div className="buttoncontainer">
-              <Button className="submitbtn" onClick={handleClick} size="small">
+              <Button className="submitbtn" onClick={()=>handleClick()} size="small">
                   Create Account
                 </Button>
             </div>
