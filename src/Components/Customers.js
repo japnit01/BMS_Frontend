@@ -65,7 +65,7 @@ function Customers() {
   return (
     <>
       <div className="myfest">
-      <Button className="submitbtn" name="balance" onClick={handleClickOpen} size="small">
+      <Button className="submitbtn" name="Update" onClick={handleClickOpen} size="small">
                   Update Balance
                 </Button>
                 <Button className="submitbtn" name="addcustomer" onClick={() => navigate(`/addcustomer`)} size="small">
@@ -84,9 +84,9 @@ function Customers() {
             name={"email"}
           ></TextField>
           <TextField
-            label={"Updated Balance"}
+            label={"Balance"}
             id={"balance"}
-            type={"number"}
+            type={"text"}
             width={"100%"}
             onChange={onChange}
             value={formdata.balance}
@@ -94,8 +94,8 @@ function Customers() {
           ></TextField>
         </DialogContent>
         <DialogActions>
-          {/* <Button name={"Cancel"} clickfunc={handleClose}></Button>
-          <Button name={"Update"} clickfunc={handleUpdate}></Button> */}
+          <Button name={"Cancel"} onClick={handleClose}>Cancel</Button>
+          <Button name={"Update"} onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
 
