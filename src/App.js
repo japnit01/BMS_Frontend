@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar'
-import Customer from './Components/Customer'
-import Employee from './Components/Employee'
+import AddCustomer from './Components/AddCustomer'
+import AddEmployee from './Components/AddEmployee'
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
             <Route path="/" />
             {/* <Route index element={<Home />} /> */}
             {/* <Route path="login" element={<Login />} /> */}
-            <Route path="customer" element={<Customer />} />
-            <Route path="employee" element={<Employee />} />
+            <Route path="addcustomer" element={<AddCustomer />} />
+            <Route path="addemployee" element={<AddEmployee />} />
           </Routes>
         </BrowserRouter>
     </>
