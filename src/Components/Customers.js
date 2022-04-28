@@ -10,7 +10,26 @@ function Customers() {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    
+    setCustomers([  {
+      "custId": 1,
+      "fname": "Japnit",
+      "lname": "Singh",
+      "Email": "japnit@gmail.com",
+      "Address": "Punjabi Bagh",
+      "MobileNo": "9818157732",
+      "Age": 21,
+      "account_type": 'savings'
+  },
+  {
+      "custId": 2,
+      "fname": "Japnit1",
+      "lname": "Singh1",
+      "Email": "japnit1@gmail.com",
+      "Address": "Punjabi Bagh1",
+      "MobileNo": "9819157732",
+      "Age": 20,
+      "account_type": 'current'
+  }])
   }, []);
 
 
@@ -20,10 +39,10 @@ function Customers() {
       <div className="myfest">
         <Grid container rowSpacing={3} spacing={1} sx={{ position: 'relative',pt:"4%"}}>
           {customers.map((customer) => (
-            <Grid key={customer._id} item xs={4}>
+            <Grid key={customer.custId} item xs={4}>
 
               <Card id="customercard" sx={{ maxWidth: 345 }} >
-                <CardActionArea className="festcardcontent">
+                <CardActionArea className="customeractioncard">
                 {/* onClick={() => navigate(`/c/fest/${fest.name}-${fest._id}`)} */}
                   
 
@@ -45,6 +64,9 @@ function Customers() {
                     </Typography>
                     <Typography variant="body2">
                       {customer.Age}
+                    </Typography>
+                    <Typography variant="body2">
+                      {customer.account_type}
                     </Typography>
                   </CardContent>
 

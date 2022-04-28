@@ -130,6 +130,21 @@ function AddCustomer() {
               </TextField>
             </div>
 
+            <TextField
+                label="Account Type"
+                id="account_type"
+                type="number"
+                className="account_type"
+                sx={{ width: "100%" }}
+                onChange={onChange}
+                value={customer.account_type}
+                name="account_type"
+                margin="dense"
+                variant="filled"
+                autoComplete="off"
+              >
+              </TextField>
+
             <div className="buttoncontainer">
               <Button className="submitbtn" onClick={handleClick} size="small">
                   Create Account
