@@ -142,24 +142,6 @@ function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className="navbar">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-{/* 
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer> */}
-
           <IconButton onClick={() => navigate("/")}>
             <HomeIcon sx={{ color: "white" }}></HomeIcon>
           </IconButton>
@@ -185,24 +167,6 @@ function Navbar() {
               </Badge>
             </IconButton>
 
-            {/* {localStorage.getItem("token") ? (
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            ) : (
-              <>
-                <Login></Login>
-                <SignUp></SignUp>
-              </>
-            )} */}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

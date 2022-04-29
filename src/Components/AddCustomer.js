@@ -1,15 +1,54 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Typography, TextField, InputLabel, MenuItem, Select, FormControl, Button, InputAdornment, Container } from "@mui/material";
+import { Typography, TextField, InputLabel, MenuItem, FormControl, Button, InputAdornment, Container } from "@mui/material";
+import Select from 'react-select';
+import customerContext from '../Context/customerContext';
+import { useParams, useNavigate,useLocation  } from "react-router-dom";
+
+const options = [
+  { value: 'Savings', label: 'Savings'},
+  {value: 'Current', label: 'Current'},
+  {value: 'Fixed Deposit', label: 'Fixed Deposits'}
+]
 
 function AddCustomer() {
-
-  const [customer, setCustomer] = useState({fname: "", lname: "", Address: "", MobileNo: "", Age: "", Email: ""});
+  const context = useContext(customerContext);
+  const {customer,setCustomer} = context;
+  const navigate = useNavigate();
+  let location = useLocation();
+  console.log(location.pathname)
   const host = 'http://localhost:5000';
 
   const onChange = (e) => {
     setCustomer({ ...customer, [e.target.name]: e.target.value });
     console.log(customer)
   }
+
+  useEffect(() => {
+    
+    if (location.pathname === "/addcustomer") {
+      setCustomer({
+        custId:"", fname: "", lname: "", Address: "", MobileNo: "", Age: "", Email: ""
+      });
+    }
+  }, []);
+
+  const handleClickUpdate = async() => {
+    // make connection with api
+    let jsondata = customer;
+    console.log(jsondata)
+    let url = `${host}/api/c/updatecustomer`;
+    let response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jsondata)
+    })
+
+    let custDetails = await response.json();
+    console.log(customer);
+    navigate(`/customers`)
+}
 
   const handleClick = async() => {
       // make connection with api
@@ -26,6 +65,7 @@ function AddCustomer() {
 
       let custDetails = await response.json();
       console.log(customer)
+      navigate(`/customers`)
   }
 
   return (
@@ -33,7 +73,7 @@ function AddCustomer() {
        <div className="signupcontainer">
         <div className="subcontainer">
           <Container maxWidth="sm" sx={{ ml: 3, pt: "7%" }}>
-            <Typography variant="h4" sx={{pb: "4%" }}>New Customer</Typography>
+            <Typography variant="h4" sx={{ pb: "4%", fontWeight: "bold" }}>Sign Up</Typography>
 
             <TextField
               label="First Name"
@@ -114,7 +154,7 @@ function AddCustomer() {
                 id="age"
                 type="number"
                 className="age"
-                sx={{ width: "28%", marginLeft: '0.6rem' }}
+                sx={{ width: "28%", marginLeft: '0.6rem', paddingBottom: '2%'}}
                 onChange={onChange}
                 value={customer.Age}
                 name="Age"
@@ -125,25 +165,17 @@ function AddCustomer() {
               </TextField>
             </div>
 
-            <TextField
-                label="Account Type"
-                id="account_type"
-                type="number"
-                className="account_type"
-                sx={{ width: "100%" }}
-                onChange={onChange}
-                value={customer.account_type}
-                name="account_type"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
+            {/* <Select options={options} /> */}
+            
 
-            <div className="buttoncontainer">
+            <div className="buttoncontainer" style={{paddingTop:"2%", marginBottom:"10%"}}>
+              {customer.custId === "" ? 
               <Button className="submitbtn" onClick={()=>handleClick()} size="small">
                   Create Account
-                </Button>
+                </Button>:
+                <Button className="submitbtn" onClick={()=>handleClickUpdate()} size="small">
+                  Update
+                </Button>}
             </div>
           </Container>
         </div>

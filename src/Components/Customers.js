@@ -5,16 +5,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import customerContext from '../Context/customerContext';
 
 function Customers() {
-
-//   const context = useContext(festContext);
-//   const { FetchFests, DeleteFest, fest, setFest, update, setupdate } = context;
+  const context = useContext(customerContext);
+  const {customer,setCustomer} = context;
   const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formdata, setFormdata] = useState({email: "",balance: 0});
+  const host = 'http://localhost:5000';
   // const [balance, setBalance] = useState(0)
+
+
+  const [update,setupdate] = useState(true)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,28 +30,34 @@ function Customers() {
     setOpen(false);
   };
 
+  const FetchCustomer = async() =>{
+    let url = `${host}/api/c/getcustomer`;
+
+    let response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    let custDetails = await response.json();
+    return custDetails;
+  }
+
   useEffect(() => {
-    setCustomers([  {
-      "custId": 1,
-      "fname": "Japnit",
-      "lname": "Singh",
-      "Email": "japnit@gmail.com",
-      "Address": "Punjabi Bagh",
-      "MobileNo": "9818157732",
-      "Age": 21,
-      "account_type": 'savings'
-  },
-  {
-      "custId": 2,
-      "fname": "Japnit1",
-      "lname": "Singh1",
-      "Email": "japnit1@gmail.com",
-      "Address": "Punjabi Bagh1",
-      "MobileNo": "9819157732",
-      "Age": 20,
-      "account_type": 'current'
-  }])
+    setupdate(true)
   }, []);
+
+  useEffect(() => {
+    if (update) {
+
+    FetchCustomer().then((customers) => {
+      const copycustomers = JSON.parse(JSON.stringify(customers));
+      console.log(copycustomers)
+      setCustomers(copycustomers);
+    });
+  }
+  },[update]);
 
   const onChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
@@ -62,9 +74,38 @@ function Customers() {
     setOpen(false);
   };
   
+  const DeleteCustomer = async(id) => {
+    let url = `${host}/api/c/deletecustomer/${id}`;
+
+    let response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    let custDetails = await response.json();
+  }
+
+  const handleupdatecustomer = (custom) =>{
+    const copycus = JSON.parse(JSON.stringify(custom));
+    console.log(custom)
+    setCustomer({
+      custId: copycus.custId,
+      fname: copycus.fname,
+      lname: copycus.lname,
+      Address: copycus.Address,
+      MobileNo: copycus.MobileNo,
+      Age: copycus.Age,
+      Email: copycus.Email,
+    });
+
+    navigate('/editcustomer') 
+  }
+
   return (
     <>
-      <div className="myfest">
+      <div className="myfest" style={{marginTop:"5%"}}>
       <Button className="submitbtn" name="Update" onClick={handleClickOpen} size="small">
                   Update Balance
                 </Button>
@@ -72,6 +113,8 @@ function Customers() {
                   Add Customer
                 </Button>
       <Dialog open={open} onClose={handleClose}>
+
+      <Typography variant="h4" sx={{ pb: "4%", fontWeight: "bold" }}>All Customers</Typography>
         <DialogTitle>Update Balance</DialogTitle>
         <DialogContent>
           <TextField
@@ -99,15 +142,11 @@ function Customers() {
         </DialogActions>
       </Dialog>
 
-        <Grid container rowSpacing={3} spacing={1} sx={{ position: 'relative',pt:"4%"}}>
-          {customers.map((customer) => (
+      <Grid container rowSpacing={3} spacing={1} sx={{ position: 'relative',pt:"4%"}}>
+          {customers && customers.map((customer) => (
             <Grid key={customer.custId} item xs={4}>
 
               <Card id="customercard" sx={{ maxWidth: 345 }} >
-                <CardActionArea className="customeractioncard">
-                {/* onClick={() => navigate(`/c/fest/${fest.name}-${fest._id}`)} */}
-                  
-
                   <CardContent>
                     <Typography variant="h5">
                       {customer.fname}
@@ -131,19 +170,15 @@ function Customers() {
                       {customer.account_type}
                     </Typography>
                   </CardContent>
-
-                </CardActionArea>
-
                 <CardActions>
-                  <IconButton aria-label="delete" sx={{ color: '#BB86FC' }} >
-                </IconButton>
-                  {/* onClick={() => DeleteFest(fest._id)}> */}
-                    {/* <DeleteOutlineIcon */}
-                  
-                  <IconButton aria-label="edit"  >
-                  {/* onClick={() => handleupdatefest(fest)} */}
-                    {/* <EditOutlinedIcon sx={{ color: '#BB86FC' }} /> */}
+                <IconButton aria-label="delete" onClick={() => DeleteCustomer(customer.custId)}>
+                    <DeleteOutlineIcon sx={{ color: '#BB86FC' }} />
                   </IconButton>
+                  
+                  <IconButton aria-label="edit" onClick={() => handleupdatecustomer(customer)} >
+                    <EditOutlinedIcon sx={{ color: '#BB86FC' }} />
+                  </IconButton>
+               
                 </CardActions>
               </Card>
             </Grid>

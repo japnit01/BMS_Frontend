@@ -38,7 +38,7 @@ function AddEmployee() {
        <div className="signupcontainer">
         <div className="subcontainer">
           <Container maxWidth="sm" sx={{ ml: 3, pt: "7%" }}>
-            <Typography variant="h4" sx={{ color: "white", pb: "4%" }}>Sign Up</Typography>
+          <Typography variant="h4" sx={{ pb: "4%", fontWeight: "bold" }}>Add Employee</Typography>
 
             <TextField
               label="First Name"
