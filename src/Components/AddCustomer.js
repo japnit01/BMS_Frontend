@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Typography, TextField, InputLabel, MenuItem, Select, FormControl, Button, InputAdornment, Container } from "@mui/material";
+import { Typography, TextField, InputLabel, MenuItem, FormControl, Button, InputAdornment, Container } from "@mui/material";
+import Select from 'react-select';
+
+const options = [
+  { value: 'savings', label: 'savings'},
+  {value: 'current', label: 'current'},
+  {value: 'demat', label: 'demat'}
+]
 
 function AddCustomer() {
 
@@ -38,7 +45,7 @@ function AddCustomer() {
        <div className="signupcontainer">
         <div className="subcontainer">
           <Container maxWidth="sm" sx={{ ml: 3, pt: "7%" }}>
-            <Typography variant="h4" sx={{ color: "white", pb: "4%" }}>Sign Up</Typography>
+            <Typography variant="h4" sx={{ pb: "4%", fontWeight: "bold" }}>Sign Up</Typography>
 
             <TextField
               label="First Name"
@@ -130,20 +137,8 @@ function AddCustomer() {
               </TextField>
             </div>
 
-            <TextField
-                label="Account Type"
-                id="account_type"
-                type="number"
-                className="account_type"
-                sx={{ width: "100%" }}
-                onChange={onChange}
-                value={customer.account_type}
-                name="account_type"
-                margin="dense"
-                variant="filled"
-                autoComplete="off"
-              >
-              </TextField>
+            <Select options={options} />
+            
 
             <div className="buttoncontainer">
               <Button className="submitbtn" onClick={handleClick} size="small">

@@ -72,6 +72,8 @@ function Customers() {
                   Add Customer
                 </Button>
       <Dialog open={open} onClose={handleClose}>
+
+      <Typography variant="h4" sx={{ pb: "4%", fontWeight: "bold" }}>All Customers</Typography>
         <DialogTitle>Update Balance</DialogTitle>
         <DialogContent>
           <TextField
@@ -135,15 +137,15 @@ function Customers() {
                 </CardActionArea>
 
                 <CardActions>
-                  <IconButton aria-label="delete" sx={{ color: '#BB86FC' }} >
-                </IconButton>
-                  {/* onClick={() => DeleteFest(fest._id)}> */}
-                    {/* <DeleteOutlineIcon */}
+                  {/* <IconButton aria-label="delete" sx={{ color: '#BB86FC' }} >
+                </IconButton>  */}
+                  {/* onClick={() => DeleteFest(fest._id)} />  */}
+                    
                   
-                  <IconButton aria-label="edit"  >
-                  {/* onClick={() => handleupdatefest(fest)} */}
-                    {/* <EditOutlinedIcon sx={{ color: '#BB86FC' }} /> */}
-                  </IconButton>
+                  {/* <IconButton aria-label="edit"  >
+                   onClick={() => handleupdatefest(fest)}
+                     <EditOutlinedIcon sx={{ color: '#BB86FC' }} /> 
+                  </IconButton> */}
                 </CardActions>
               </Card>
             </Grid>
